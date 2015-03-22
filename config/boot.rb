@@ -7,6 +7,8 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
 
+Sequel::Model.plugin :json_serializer
+
 ##
 # ## Enable devel logging
 #

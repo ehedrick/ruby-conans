@@ -5,6 +5,10 @@ module RubyConans
 
     enable :sessions
 
+    configure :development do
+      enable :reload
+    end
+
     ##
     # Caching support.
     #
