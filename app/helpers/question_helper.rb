@@ -3,9 +3,10 @@
 module RubyConans
   class App
     module QuestionHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def is_answer_correct?(question_id, answer)
+        question = Question.where(id: question_id).first.text
+        eval(question) == eval(answer)
+      end
     end
 
     helpers QuestionHelper
