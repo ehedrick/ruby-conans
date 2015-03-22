@@ -1,5 +1,5 @@
 Question.create language: 'ruby', text: '[0][1]'
-Question.create language: 'ruby', text: "%s'%%s's'"
+Question.create language: 'ruby', text: "'%s'%%s's'"
 Question.create language: 'ruby', text: "''<<''"
 Question.create language: 'ruby', text: "'CONAN'.codepoints.reduce(:+)"
 Question.create language: 'ruby', text: "'^\^'.count('^\^')"

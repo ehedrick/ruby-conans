@@ -1,0 +1,55 @@
+code {
+    font-size: 16px;
+}
+
+:host .question, :host .answer {
+    width: 50%;
+}
+
+:host .question {
+    margin-left: 20px;
+}
+
+:host .document {
+    width: 80%;
+    padding-bottom: 20px;
+}
+
+:host {
+    margin-bottom: 20px;
+}
+
+:host .answer paper-input-decorator {
+    padding-right: 20px;
+}
+
+:host .submit-answer {
+    background-color: #4F7DC9;
+    color: white;
+}
+
+:host .floating-label .label-text {
+    font-size: 24px;
+}
+
+paper-shadow.document {
+    background-color: white;
+}
+
+paper-shadow.document.wrong {
+    background-color: rgb(255, 196, 196);
+    -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -ms-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
+}
+
+paper-shadow.document.correct {
+    background-color: #7ee37e;
+    -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -ms-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
+}
