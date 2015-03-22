@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="components/font-roboto/roboto.html" />
+    <link rel="import" href="components/core-header-panel/core-header-panel.html" />
+    <link rel="import" href="components/core-ajax/core-ajax.html" />
+    <link rel="import" href="components/paper-elements/paper-elements.html" />
+    <link rel="import" href="elements/question-card.html" />
+    <link rel="import" href="elements/question-cards.html" />
+    <style>
+
+
+
+        body {
+            font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: rgb(247, 247, 247);
+        }
+
+        .core-header {
+            height: 300px;
+            line-height: 60px;
+            font-size: 18px;
+            padding: 0 10px;
+            background-color: #4F7DC9;
+            color: #FFF;
+        }
+
+        .content {
+            padding-top: 100px;
+        }
+
+        h1{
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+    </style>
+</head>
+<body fullbleed layout vertical>
+
+<core-header-panel flex mode="cover">
+    <div class="core-header"></div>
+    <div class="content" fill layout vertical center-justified>
+        <question-cards></question-cards>
+    </div>
+</core-header-panel>
+
+</body>
+</html>

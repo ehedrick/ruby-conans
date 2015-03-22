@@ -1,0 +1,14 @@
+<polymer-element name="question-cards">
+    <template>
+        <core-ajax auto url="/questions/ruby" handleAs="json" on-core-response="{{question_response}}"></core-ajax>
+        <template repeat="{{question in questions}}">
+            <question-card question={{question}}></question-card>
+        </template>
+
+    </template>
+    <script>
+        Polymer('question-cards', {
+            question_response: function(event){ this.questions = event.detail.response; }
+        });
+    </script>
+</polymer-element>

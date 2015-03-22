@@ -9,6 +9,10 @@ module RubyConans
       enable :reload
     end
 
+    get '/' do
+      File.read(File.join('public', 'index.html'))
+    end
+
     ##
     # Caching support.
     #

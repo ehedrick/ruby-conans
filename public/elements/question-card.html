@@ -1,0 +1,64 @@
+
+<polymer-element name="question-card" attributes="question" noscript horizontal layout center-justified>
+    <template>
+        <style type="text/css">
+            :host .question, :host .answer {
+                width: 50%;
+            }
+            
+            :host .question {
+                margin-left: 20px;
+            }
+                        
+            :host .document {
+                width: 80%;
+                padding-bottom: 20px;
+            }
+            
+            
+            :host {
+                margin-bottom: 20px;
+            }
+            
+            :host .answer paper-input-decorator {
+                padding-right: 20px;
+            }
+            
+            :host .submit-answer {
+                background-color: #4F7DC9;
+                color: white;
+            }
+            
+            :host .floating-label .label-text {
+                font-size: 24px;
+            }
+            
+            :host paper-shadow.document {
+                background-color: white;    
+            }
+            
+            :host[wrong] paper-shadow.document {
+                background-color: rgb(255, 196, 196);    
+            }
+            
+            :host[correct] paper-shadow.document {
+                background-color: #7ee37e;    
+            }
+            
+        </style>
+        <paper-shadow class="document" horizontal layout center-justified>
+            <div class="question" vertical layout center-justified>
+                <code>{{question.text}}</code>
+            </div>
+            <div class="answer">
+                <h1>Answer:</h1>
+                <paper-input-decorator label="Your answer">
+                    <paper-autogrow-textarea>
+                        <textarea></textarea>
+                    </paper-autogrow-textarea>
+                </paper-input-decorator>
+                <paper-button raised class="submit-answer">Submit</paper-button>
+            </div>
+        </paper-shadow>
+    </template>
+</polymer-element>
