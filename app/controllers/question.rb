@@ -5,7 +5,6 @@ RubyConans::App.controllers :question do
   end
 
   post :answer, with: :question_id, provides: [:js] do
-    puts params
     is_answer_correct?(params[:question_id], JSON.parse(request.body.read).fetch('answer')).to_json
   end
 end
