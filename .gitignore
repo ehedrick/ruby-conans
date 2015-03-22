@@ -20,6 +20,7 @@ db/*.db
 
 /.idea/
 *.iml
+/public/components/
 
 ## Specific to RubyMotion:
 .dat*
