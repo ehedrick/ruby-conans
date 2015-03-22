@@ -1,5 +1,5 @@
 
-<polymer-element name="question-card" attributes="question" noscript horizontal layout center-justified>
+<polymer-element name="question-card" attributes="question wrong correct" horizontal layout center-justified>
     <template>
         <style type="text/css">
             :host .question, :host .answer {
@@ -37,10 +37,10 @@
                 background-color: white;    
             }
             
-            :host[wrong] paper-shadow.document {
+            :host[wrong] ::shadow paper-shadow.document {
                 background-color: rgb(255, 196, 196);    
             }
-            
+
             :host[correct] paper-shadow.document {
                 background-color: #7ee37e;    
             }
@@ -54,11 +54,45 @@
                 <h1>Answer:</h1>
                 <paper-input-decorator label="Your answer">
                     <paper-autogrow-textarea>
-                        <textarea></textarea>
+                        <textarea id="answer-{{question.id}}"></textarea>
                     </paper-autogrow-textarea>
                 </paper-input-decorator>
-                <paper-button raised class="submit-answer">Submit</paper-button>
+                <paper-button raised class="submit-answer" on-click="{{submit}}">Submit</paper-button>
             </div>
         </paper-shadow>
     </template>
+    <script>
+        Polymer('question-card', {
+            publish: {
+                wrong: {
+                    value: false,
+                    reflect: true
+                },
+                correct: {
+                    value: false,
+                    reflect: true
+                }
+            },
+           submit: function(e, detail, sender){
+               var element = this;
+               var question_id = this.question.id;
+               var answer = this.$['answer-'+question_id].value;
+
+               var req = new XMLHttpRequest();
+               req.open('POST', '/question/answer/'+question_id, true)
+               req.onload = function(){
+                   console.log(this.response);
+
+                   if(this.response == 'true'){
+                       element.correct = true;
+                       element.wrong = false;
+                   }else{
+                       element.wrong = true;
+                       element.correct = false;
+                   }
+               }
+               req.send(JSON.stringify({answer: answer}));
+           }
+        });
+    </script>
 </polymer-element>
