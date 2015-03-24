@@ -5,7 +5,10 @@ module RubyConans
     module QuestionHelper
       def is_answer_correct?(question_id, answer)
         question = Question.where(id: question_id).first.text
-        eval(question) == eval(answer)
+        proc {
+          $SAFE=4
+          eval(question) == eval(answer)
+        }.call
       end
     end
 
