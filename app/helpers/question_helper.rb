@@ -4,7 +4,7 @@ module RubyConans
   class App
     module QuestionHelper
       def is_answer_correct?(question_id, answer)
-        question = Question.find(question_id).text
+        question = Question.where(id: question_id).first.text
         begin
           proc {
             $SAFE=4
