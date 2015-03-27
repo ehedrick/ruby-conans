@@ -8,7 +8,7 @@ module RubyConans
         begin
           proc {
             $SAFE=4
-            eval(question) == eval(answer)
+            eval(question).inspect == answer.tr("'",'"').tr(' ','').gsub(',]',']')
           }.call 
         rescue SecurityError 
           #puts 'ah ah ah, you didn't say the magic word'
