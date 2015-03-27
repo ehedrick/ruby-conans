@@ -4,11 +4,11 @@ module RubyConans
   class App
     module QuestionHelper
       def is_answer_correct?(question_id, answer)
-        question = Question.where(id: question_id).first.text
+        question = Question.where(id: question_id).first
         begin
           proc {
             $SAFE=4
-            eval(question).inspect == answer.tr("'",'"').tr(' ','').gsub(',]',']')
+            question.matches? answer
           }.call 
         rescue SecurityError 
           #puts 'ah ah ah, you didn't say the magic word'
