@@ -8,11 +8,19 @@ module RubyConans
         begin
           proc {
             $SAFE=4
-            eval(question).inspect == answer.tr("'",'"').tr(' ','').gsub(',]',']')
+            eval(question) == eval(answer)
           }.call 
         rescue SecurityError 
           #puts 'ah ah ah, you didn't say the magic word'
         end
+      end
+
+      def record_guess
+        guess = Guess.new
+        guess.text = @request_payload.fetch('answer')
+        guess.ip_address = request.ip
+        guess.question_id = @question_id
+        guess.save
       end
     end
 
