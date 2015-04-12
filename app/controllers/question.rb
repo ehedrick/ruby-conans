@@ -1,12 +1,12 @@
 RubyConans::App.controllers :question do
   get :index, map: '/questions/:language', provides: [:js] do
-    questions = Question.where(language: params[:language].downcase)
+    questions = Question.where(language: params[:language].downcase).order(:display_order)
     questions.to_json
   end
 
   get :with_topic, map: '/questions/:language/:topic', provides: [:js] do
     topic_title = params[:topic].downcase
-    @questions = Question.where(language: params[:language].downcase).join(Topic.where(title: topic_title), id: :topic_id)
+    @questions = Question.where(language: params[:language].downcase).order(:display_order).join(Topic.where(title: topic_title), id: :topic_id)
     render 'question/with_topic'
   end
 

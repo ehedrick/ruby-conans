@@ -28,6 +28,7 @@ div class="tabs-content"
         th class='header' = mat(:topic, :id)
         th class='header' = mat(:topic, :title)
         th class='header' = mat(:topic, :description)
+        th class='header' = mat(:topic, :display_order)
         th class='header list-row-action-header'
 
     tbody
@@ -37,6 +38,7 @@ div class="tabs-content"
           td class='list-column' = topic.id
           td class='list-column' = topic.title
           td class='list-column' = topic.description
+          td class='list-column' = topic.display_order
           td class='list-column list-row-action'
             div class='list-row-action-wrapper'
               = link_to tag_icon(:edit), :href => url(:topics, :edit, :id => topic.id), :rel => :tooltip, :title => "#{pat(:edit)} topic", :class => 'list-row-action-wrapper-link'
