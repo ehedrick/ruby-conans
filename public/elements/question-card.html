@@ -27,8 +27,6 @@
                var req = new XMLHttpRequest();
                req.open('POST', '/question/answer/'+question_id, true)
                req.onload = function(){
-                   console.log(this.response);
-
                    if(this.response == 'true'){
                        element.$['doc-'+question_id].setAttribute('class', 'document correct');
                    }else{
