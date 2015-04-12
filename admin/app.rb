@@ -32,6 +32,7 @@ module RubyConans
     end
 
     access_control.roles_for :admin do |role|
+      role.project_module :topics, '/topics'
       role.project_module :questions, '/questions'
       role.project_module :accounts, '/accounts'
     end

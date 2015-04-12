@@ -4,6 +4,12 @@ RubyConans::App.controllers :question do
     questions.to_json
   end
 
+  get :with_topic, map: '/questions/:language/:topic', provides: [:js] do
+    topic_title = params[:topic].downcase
+    @questions = Question.where(language: params[:language].downcase).join(Topic.where(title: topic_title), id: :topic_id)
+    render 'question/with_topic'
+  end
+
   post :answer, with: :question_id, provides: [:js] do
     @request_payload = JSON.parse request.body.read
     @question_id = params[:question_id]

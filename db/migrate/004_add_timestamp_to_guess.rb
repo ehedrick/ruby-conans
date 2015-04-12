@@ -4,6 +4,6 @@ Sequel.migration do
   end
 
   down do
-    remove_column :guesses, :created_at
+    drop_column :guesses, :created_at
   end
 end

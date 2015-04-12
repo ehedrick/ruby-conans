@@ -1,6 +1,6 @@
 ul class="nav nav-tabs"
-  li class="active" = link_to tag_icon(:list, pat(:list)), url(:questions, :index)
-  li = link_to tag_icon(:plus, pat(:new)), url(:questions, :new)
+  li class="active" = link_to tag_icon(:list, pat(:list)), url(:topics, :index)
+  li = link_to tag_icon(:plus, pat(:new)), url(:topics, :new)
 
 div class="tabs-content"
   table class="table table-striped table-hover table-condensed" id="list"
@@ -21,32 +21,30 @@ div class="tabs-content"
                   div class='arrow'
                   h3 class='popover-title' = pat(:delete_selected_title)
                   div class='popover-content'
-                    = form_tag url(:questions, :destroy_many), :method => :delete do
-                      = hidden_field_tag :question_ids, :'data-delete-many-ids' => true
+                    = form_tag url(:topics, :destroy_many), :method => :delete do
+                      = hidden_field_tag :topic_ids, :'data-delete-many-ids' => true
                       = submit_tag  pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
                       div class='btn btn-default btn-small cancel' = pat(:cancel)
-        th class='header' = mat(:question, :id)
-        th class='header' = mat(:question, :text)
-        th class='header' = mat(:question, :language)
-        th class='header' = mat(:question, :topic_id)
+        th class='header' = mat(:topic, :id)
+        th class='header' = mat(:topic, :title)
+        th class='header' = mat(:topic, :description)
         th class='header list-row-action-header'
 
     tbody
-      -@questions.each do |question|
+      -@topics.each do |topic|
         tr class='list-row'
-          td class='list-column list-selectable' = check_box_tag 'question_ids[]', :value => question.id, :class => 'list-selectable-checkbox'
-          td class='list-column' = question.id
-          td class='list-column' = question.text
-          td class='list-column' = question.language
-          td class='list-column' = question.topic_id
+          td class='list-column list-selectable' = check_box_tag 'topic_ids[]', :value => topic.id, :class => 'list-selectable-checkbox'
+          td class='list-column' = topic.id
+          td class='list-column' = topic.title
+          td class='list-column' = topic.description
           td class='list-column list-row-action'
             div class='list-row-action-wrapper'
-              = link_to tag_icon(:edit), :href => url(:questions, :edit, :id => question.id), :rel => :tooltip, :title => "#{pat(:edit)} question", :class => 'list-row-action-wrapper-link'
-              = link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} question", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              = link_to tag_icon(:edit), :href => url(:topics, :edit, :id => topic.id), :rel => :tooltip, :title => "#{pat(:edit)} topic", :class => 'list-row-action-wrapper-link'
+              = link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} topic", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
               div class='popover list-row-action-popover-delete-one left'
                 div class='arrow'
-                h3 class='popover-title' = pat(:delete, :model => "question")
+                h3 class='popover-title' = pat(:delete, :model => "topic")
                 div class='popover-content'
-                  = form_tag url(:questions, :destroy, :id => question.id), :method => :delete do
+                  = form_tag url(:topics, :destroy, :id => topic.id), :method => :delete do
                     = submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
                     div class='btn btn-default btn-small cancel' = pat(:cancel)

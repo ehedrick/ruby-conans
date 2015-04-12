@@ -11,7 +11,7 @@ module RubyConans
             eval(question) == eval(answer)
           }.call 
         rescue SecurityError 
-          #puts 'ah ah ah, you didn't say the magic word'
+          puts "ah ah ah, you didn't say the magic word"
         end
       end
 
