@@ -1,17 +1,44 @@
+@media(max-width: 1024px){
+    :host .question, .answer {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    :host .answer {
+        margin-left: 20px;
+    }
+
+    :host .document {
+        width: 100%;
+    }
+
+    :host /deep/ .underline, :host /deep/ .input-body {
+        margin-right: 20px;
+    }
+}
+
+@media(min-width: 1024px){
+    :host .question, :host .answer {
+        width: 50%;
+    }
+
+    :host .document {
+        width: 80%;
+    }
+}
+
 code {
     font-size: 16px;
 }
 
-:host .question, :host .answer {
-    width: 50%;
-}
+
 
 :host .question {
     margin-left: 20px;
 }
 
 :host .document {
-    width: 80%;
     padding-bottom: 20px;
 }
 

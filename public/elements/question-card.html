@@ -19,22 +19,27 @@
     </template>
     <script>
         Polymer('question-card', {
-           submit: function(e, detail, sender){
-               var element = this;
-               var question_id = this.question.id;
-               var answer = this.$['answer-'+question_id].value;
+            domReady: function(){
+                if(window.innerWidth <= 1024){
+                    this.shadowRoot.querySelector('.document').removeAttribute('horizontal');
+                }
+            },
+            submit: function(e, detail, sender){
+                   var element = this;
+                   var question_id = this.question.id;
+                   var answer = this.$['answer-'+question_id].value;
 
-               var req = new XMLHttpRequest();
-               req.open('POST', '/question/answer/'+question_id, true)
-               req.onload = function(){
-                   if(this.response == 'true'){
-                       element.$['doc-'+question_id].setAttribute('class', 'document correct');
-                   }else{
-                       element.$['doc-'+question_id].setAttribute('class', 'document wrong');
+                   var req = new XMLHttpRequest();
+                   req.open('POST', '/question/answer/'+question_id, true)
+                   req.onload = function(){
+                       if(this.response == 'true'){
+                           element.$['doc-'+question_id].setAttribute('class', 'document correct');
+                       }else{
+                           element.$['doc-'+question_id].setAttribute('class', 'document wrong');
+                       }
                    }
-               }
-               req.send(JSON.stringify({answer: answer}));
-           }
+                   req.send(JSON.stringify({answer: answer}));
+            }
         });
     </script>
 </polymer-element>

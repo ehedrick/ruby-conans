@@ -15,9 +15,6 @@
     <link rel="import" href="elements/question-cards.html" />
     <link rel="import" href="elements/topic-list.html" />
     <style>
-
-
-
         body {
             font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: rgb(247, 247, 247);
@@ -32,20 +29,17 @@
             color: #FFF;
         }
 
-        /*.content {*/
-            /*padding-top: 100px;*/
-        /*}*/
-
         h1{
             font-size: 18px;
             font-weight: 300;
         }
 
-        /*#navheader {*/
-            /*background-color: #56BA89;*/
-        /*}*/
         .content {
             padding: 20px;
+        }
+
+        core-header-panel {
+            box-shadow: 8px -3px 6px -3px rgba(0, 0, 0, 0.4);
         }
 
     </style>
@@ -59,10 +53,6 @@
             <span>Topics</span>
         </core-toolbar>
         <topic-list></topic-list>
-        <!--<core-menu>-->
-            <!--<core-item label="One"></core-item>-->
-            <!--<core-item label="Two"></core-item>-->
-        <!--</core-menu>-->
     </core-header-panel>
 
     <span tool>Ruby Conans</span>
@@ -72,12 +62,25 @@
     </div>
 </core-scaffold>
 
-<!--<core-header-panel flex mode="cover">-->
-    <!--<div class="core-header"></div>-->
-    <!--<div class="content" fill layout vertical center-justified>-->
-        <!--<question-cards></question-cards>-->
-    <!--</div>-->
-<!--</core-header-panel>-->
+<script type="application/javascript">
+    function set_card_layout(){
+        console.log('called');
+        var width = window.innerWidth;
+        var cards = document.querySelectorAll("question-card /deep/ paper-shadow.document");
 
+        for(var i=0; i< cards.length; i++){
+            if(width < 1000) {
+                cards[i].removeAttribute('horizontal');
+            } else {
+                cards[i].setAttribute('horizontal', 'true');
+            }
+        }
+    }
+
+    window.onresize = set_card_layout;
+    window.addEventListener('polymer-ready', function(){
+       document.querySelector('core-scaffold').responsiveWidth = '1024px';
+    });
+</script>
 </body>
 </html>
