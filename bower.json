@@ -18,6 +18,6 @@
     "polymer": "Polymer/polymer#~0.5.5",
     "paper-elements": "Polymer/paper-elements#~0.5.5",
     "core-ajax": "Polymer/core-ajax#~0.5.5",
-    "core-ajax": "Polymer/core-scaffold#~0.5.5"
+    "core-scaffold": "Polymer/core-scaffold#~0.5.5"
   }
 }
