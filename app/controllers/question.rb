@@ -6,7 +6,7 @@ RubyConans::App.controllers :question do
 
   get :with_topic, map: '/questions/:language/:topic', provides: [:js] do
     topic_title = params[:topic].downcase
-    @questions = Question.where(language: params[:language].downcase).order(:questions__display_order).graph(Topic.where(title: topic_title), id: :topic_id)
+    @questions = Question.where(language: params[:language].downcase).order(:questions__display_order).graph(Topic.where(title: topic_title), {id: :topic_id}, {join_type: :inner})
     render 'question/with_topic'
   end
 
