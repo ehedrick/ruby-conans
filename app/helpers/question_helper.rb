@@ -3,16 +3,18 @@
 module RubyConans
   class App
     module QuestionHelper
-      def is_answer_correct?(question_id, answer)
+      def judge_anser(question_id, answer)
         question = Question.where(id: question_id).first.text
+
+        return "invalidAnswer" if remove_common_substitutions(question) == remove_common_substitutions(answer)
+
         begin
           proc {
             $SAFE=4
             eval(question) == eval(answer)
-          }.call 
-        rescue SecurityError 
-          puts "ah ah ah, you didn't say the magic word"
-          false
+          }.call
+        rescue Exception
+          "insecureAnswer"
         end
       end
 
@@ -22,6 +24,10 @@ module RubyConans
         guess.ip_address = request.ip
         guess.question_id = @question_id
         guess.save
+      end
+
+      def remove_common_substitutions(item)
+        item.gsub(/'/, '"').gsub(/\(|\)/, '').gsub(" ", '')
       end
     end
 
