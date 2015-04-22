@@ -14,6 +14,6 @@ RubyConans::App.controllers :question do
     @request_payload = JSON.parse request.body.read
     @question_id = params[:question_id]
     record_guess
-    is_answer_correct?(@question_id, @request_payload.fetch('answer')).to_json
+    judge_anser(@question_id, @request_payload.fetch('answer')).to_json
   end
 end
