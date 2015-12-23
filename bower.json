@@ -1,6 +1,6 @@
 {
   "name": "ruby-conans",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/ehedrick/ruby-conans",
   "authors": [
     "ethan@sneakysemicolon.com"
@@ -15,9 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.5",
-    "paper-elements": "Polymer/paper-elements#~0.5.5",
-    "core-ajax": "Polymer/core-ajax#~0.5.5",
-    "core-scaffold": "Polymer/core-scaffold#~0.5.5"
+    "polymer": "Polymer/polymer#^1.2.0",
+    "paper-elements": "polymerelements/paper-elements#^1.0.7",
+    "iron-elements": "polymerelements/iron-elements#^1.0.7"
   }
 }

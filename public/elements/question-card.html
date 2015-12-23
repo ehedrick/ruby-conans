@@ -1,45 +1,95 @@
-
-<polymer-element name="question-card" attributes="question" horizontal layout center-justified>
-    <template>
-        <link rel="stylesheet" href="question-card.css" />
-        <paper-shadow class="document" id="doc-{{question.id}}" horizontal layout center-justified>
-            <div class="question" vertical layout center-justified>
+  <style is="custom-style">
+    /* TODO(polyup): For speed, consider reworking these styles with .classes
+                     and #ids rather than [attributes].
+    */
+    [layout] {
+      @apply(--layout);
+    }
+    [layout][horizontal] {
+      @apply(--layout-horizontal);
+    }
+    [layout][center-justified] {
+      @apply(--layout-center-justified);
+    }
+  </style>
+<dom-module id="question-card">
+  <style>
+    /* TODO(polyup): For speed, consider reworking these styles with .classes
+                     and #ids rather than [attributes].
+    */
+    :host[layout] {
+      @apply(--layout);
+    }
+    :host[layout][horizontal] {
+      @apply(--layout-horizontal);
+    }
+    :host[layout][center-justified] {
+      @apply(--layout-center-justified);
+    }
+    [layout] {
+      @apply(--layout);
+    }
+    [layout][horizontal] {
+      @apply(--layout-horizontal);
+    }
+    [layout][center-justified] {
+      @apply(--layout-center-justified);
+    }
+    [layout][vertical] {
+      @apply(--layout-vertical);
+    }
+  </style>
+  <link rel="import" type="css" href="question-card.css">
+  <template>
+        <paper-material class="document" id="{{_computeId(question)}}" horizontal="" layout="" center-justified="">
+            <div class="question" vertical="" layout="" center-justified="">
                 <code>{{question.text}}</code>
             </div>
             <div class="answer">
                 <h1>Answer:</h1>
                 <paper-input-decorator label="Your answer">
-                    <paper-autogrow-textarea>
-                        <textarea id="answer-{{question.id}}"></textarea>
-                    </paper-autogrow-textarea>
+                    <paper-textarea id="{{_computeId2(question)}}"></paper-textarea>
                 </paper-input-decorator>
-                <paper-button raised class="submit-answer" on-click="{{submit}}">Submit</paper-button>
+                <paper-button raised="" class="submit-answer" on-click="submit">Submit</paper-button>
             </div>
-        </paper-shadow>
+        </paper-material>
     </template>
-    <script>
-        Polymer('question-card', {
-            domReady: function(){
-                if(window.innerWidth <= 1024){
-                    this.shadowRoot.querySelector('.document').removeAttribute('horizontal');
-                }
-            },
-            submit: function(e, detail, sender){
-                   var element = this;
-                   var question_id = this.question.id;
-                   var answer = this.$['answer-'+question_id].value;
-
-                   var req = new XMLHttpRequest();
-                   req.open('POST', '/question/answer/'+question_id, true)
-                   req.onload = function(){
-                       if(this.response == 'true'){
-                           element.$['doc-'+question_id].setAttribute('class', 'document correct');
-                       }else{
-                           element.$['doc-'+question_id].setAttribute('class', 'document wrong');
-                       }
-                   }
-                   req.send(JSON.stringify({answer: answer}));
-            }
-        });
-    </script>
-</polymer-element>
+  <script>
+    Polymer({
+      is: 'question-card',
+      properties: { question: { notify: true } },
+      submit: function (e, detail, sender) {
+        var element = this;
+        var question_id = this.question.id;
+        var answer = this.getElementsByTagName('paper-textarea')[0].value;
+        var req = new XMLHttpRequest();
+        req.open('POST', '/question/answer/' + question_id, true);
+        req.onload = function () {
+            card = Polymer.dom(element.getElementsByTagName('paper-material')[0]);
+          if (this.response == 'true') {
+            card.setAttribute('class', 'document correct');
+          } else {
+            card.setAttribute('class', 'document wrong');
+          }
+        };
+        req.send(JSON.stringify({ answer: answer }));
+      },
+      hostAttributes: {
+        'horizontal': '',
+        'layout': '',
+        'center-justified': ''
+      },
+      ready: function () {
+        if (window.innerWidth <= 1024) {
+          Polymer.dom(Polymer.dom(this.shadowRoot).querySelector('.document')).removeAttribute('horizontal');
+        }
+      },
+      _computeId: function (question) {
+        return 'doc-' + question.id;
+      },
+      _computeId2: function (question) {
+        return 'answer-' + question.id;
+      }
+    });
+  </script>
+</dom-module>
