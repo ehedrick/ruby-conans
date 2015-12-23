@@ -10,7 +10,8 @@ module RubyConans
 
         begin
           proc {
-            $SAFE=4
+            # TODO this needs looked at since it was removed in ruby 2.1 perhaps replace with https://github.com/tario/shikashi
+            # $SAFE=4
             eval(question) == eval(answer)
           }.call
         rescue Exception
